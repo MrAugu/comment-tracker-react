@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Home extends React.Component {
   render () {
@@ -9,7 +10,7 @@ class Home extends React.Component {
           <p className="subtitle block">A react app with a node.js backend written using the fastify framework created by MrAugu#7917 [mraugu@yahoo.com] in order to learn and work hands-on with these technologies.</p>
           <a className="button is-link block" href="https://github.com/MrAugu/comment-tracker-react">React App Source on GitHub</a>
           <a className="button is-info block" href="https://github.com/MrAugu/comment-tracker" style={{ marginLeft: "1em" }}>Backend Source on GitHub</a>
-          <br></br><a className="button is-ghost block" href="/">Go to signup page</a>
+          <br></br><Link className="button is-ghost block" to="/login">Go to signup page</Link>
         </div>
       </div>
     );

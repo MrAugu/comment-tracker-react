@@ -5,6 +5,7 @@ import Home from "./views/Home";
 import Login from "./views/Login";
 import Signup from "./views/Signup";
 import User from "./views/User";
+import Users from "./views/Users";
 import UserEdit from "./views/UserEdit";
 import {
   BrowserRouter as Router,
@@ -15,13 +16,14 @@ class App extends React.Component {
   render () {
     return (
       <Router>
+        <NavBar />
         <Switch>
-          <NavBar />
           <Route path="/" component={Home} exact={true} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/user" component={User} />
-          <Route path="/user/edit" component={UserEdit} />
+          <Route path="/users" component={Users} />
+          <Route path="/user/edit" component={UserEdit} exact={true} />
         </Switch>
       </Router>
     );
