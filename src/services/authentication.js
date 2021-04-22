@@ -9,6 +9,7 @@ class AuthenticationService {
     }).then((response) => {
       const body = response.data;
       localStorage.setItem("user", body.data.token);
+      localStorage.setItem("refresh_user", body.data.refreshToken);
       return body;
     });
   }
