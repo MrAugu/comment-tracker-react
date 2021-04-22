@@ -3,18 +3,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 class NavBar extends React.Component {
-  componentDidMount () {
-    console.log("mounted");
-    fetch(`${this.props.baseApi}/me`, {
-        method: "GET",
-        credentials: "include"
-      }).then((response) => {
-        if (response.ok) return response.json();
-        else throw new Error(response.statusText); 
-      }).then(console.log)
-      .catch(() => {});
-  }
-
   render () {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -24,15 +12,17 @@ class NavBar extends React.Component {
               <div className="buttons">
                 <Link className="button is-light" to="/">Home</Link>
                 <Link className="button is-light" to="/users">Users</Link>
+               
+                {!this.props.user.loggedIn && (<span>
+                  <Link className="button is-light" to="/signup">Sign Up</Link>
+                  <Link className="button is-primary" to="/login">Login</Link>
+                </span>)}
 
-                {/* When user is not logged in. */}
-                {/*<Link className="button is-light" to="/signup">Sign Up</Link>
-                <Link className="button is-primary" to="/login">Login</Link>*/}
-
-                {/* When user is logged in. */}
-                <Link className="button is-light" to="/user/edit">Edit Profile</Link>
-                <Link className="button is-light" to="/logout">Logout</Link>
-                <Link className="button is-primary" to="/users/me">Hello, MrAugu!</Link>
+                {this.props.user.loggedIn && (<span>
+                  <Link className="button is-light" to="/user/edit">Edit Profile</Link>
+                  <Link className="button is-light" to="/logout">Logout</Link>
+                  <Link className="button is-primary" to="/users/me">Hello, { this.props.user.username }!</Link>
+                </span>)}
               </div>
             </div>
           </div>
@@ -42,12 +32,11 @@ class NavBar extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  id: state.id,
-  username: state.username,
-  color: state.color,
-  displayName: state.displayName,
-  loggedIn: state.loggedIn,
-  baseApi: state.baseApi
-});
+const mapStateToProps = (state) => {
+  const user = state.authentication;
+  return {
+    user
+  };
+}
+
 export default connect(mapStateToProps)(NavBar);

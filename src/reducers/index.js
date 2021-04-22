@@ -3,8 +3,8 @@ import authenticationReducer from "./authentication";
 import messageReducer from "./message";
 
 const reducer = combineReducers({
-  authenticationReducer,
-  messageReducer
+  authentication: authenticationReducer,
+  message: messageReducer
 });
 
 export default reducer;
