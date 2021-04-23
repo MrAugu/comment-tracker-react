@@ -7,16 +7,22 @@ import {
   USER_DATA
 } from "../actions/types";
 
+const userExpiry = parseInt(
+    localStorage.getItem("user_e") ?
+    atob(localStorage.getItem("user_e")).split(".")[1]
+    : null, 10);
+
+if (Date.now() <= userExpiry) {
+  localStorage.removeItem("user");
+  localStorage.removeItem("user_t");
+  localStorage.removeItem("user_r");
+  localStorage.removeItem("user_e");
+}
+
 let user = localStorage.getItem("user") ? JSON.parse(atob(
   localStorage.getItem("user")
 )) : null;
 
-const userExpiry = parseInt(
-  localStorage.getItem("user_e") ?
-  atob(localStorage.getItem("user_e")).split(".")[1]
-  : null, 10);
-
-if (userExpiry <= Date.now()) user = {};
 const initialState = user ? { loggedIn: true, user } : { loggedIn: false, user: null };
 
 export default function authenticationReducer (state = initialState, action) {
