@@ -12,7 +12,7 @@ class NavBar extends React.Component {
               <div className="buttons">
                 <Link className="button is-light" to="/">Home</Link>
                 <Link className="button is-light" to="/users">Users</Link>
-               
+
                 {!this.props.user.loggedIn && (<span>
                   <Link className="button is-light" to="/signup">Sign Up</Link>
                   <Link className="button is-primary" to="/login">Login</Link>
@@ -21,7 +21,7 @@ class NavBar extends React.Component {
                 {this.props.user.loggedIn && (<span>
                   <Link className="button is-light" to="/user/edit">Edit Profile</Link>
                   <Link className="button is-light" to="/logout">Logout</Link>
-                  <Link className="button is-primary" to="/users/me">Hello, { this.props.user.username }!</Link>
+                  <Link className="button is-primary" to="/users/me">Hello, { this.props.username }!</Link>
                 </span>)}
               </div>
             </div>
@@ -35,6 +35,7 @@ class NavBar extends React.Component {
 const mapStateToProps = (state) => {
   const user = state.authentication;
   return {
+    ...user.user,
     user
   };
 }

@@ -1,13 +1,13 @@
 import axios from "axios";
-import { BASE_API_URL } from "../config";
+import { API_BASE_URL } from "../config";
 import UserService from "./user";
 
 class AuthenticationService {
   login (username, password) {
-    return axios.post(`${BASE_API_URL}/login`, {
-      username,
-      password
-    }).then(async (response) => {
+    return axios.post(`${API_BASE_URL}/login`, {
+        "username": username,
+        "password": password
+      }).then(async (response) => {
       const body = response.data;
       localStorage.setItem("user_t", btoa(body.data.token));
       localStorage.setItem("user_r", btoa(body.data.refreshToken));
@@ -26,7 +26,7 @@ class AuthenticationService {
   }
 
   register (username, password) {
-    return axios.post(`${BASE_API_URL}/signup`, {
+    return axios.post(`${API_BASE_URL}/signup`, {
       username,
       password
     });
