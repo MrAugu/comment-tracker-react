@@ -1,12 +1,13 @@
+import NavBar from "./components/NavBar";
+import UserEdit from "./views/UserEdit";
+import Signup from "./views/Signup";
+import Login from "./views/Login";
+import Users from "./views/Users";
+import Home from "./views/Home";
+import User from "./views/User";
 import React from "react";
 import './App.css';
-import NavBar from "./components/NavBar";
-import Home from "./views/Home";
-import Login from "./views/Login";
-import Signup from "./views/Signup";
-import User from "./views/User";
-import Users from "./views/Users";
-import UserEdit from "./views/UserEdit";
+
 import {
   BrowserRouter as Router,
   Switch, Route

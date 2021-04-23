@@ -1,11 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { logout } from "../actions/authentication";
 
 class NavBar extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      hasLoggedOut: false
+    };
+  }
+  handleLogout = () => {
+    const { dispatch } = this.props;
+    logout()(dispatch);
+    this.setState({
+      hasLoggedOut: true
+    });
+  }
+
   render () {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
+        {this.state.hasLoggedOut && (<Redirect to="/"></Redirect>)}
         <div id="navbarBasic" className="navbar-menu">
           <div className="navbar-start">
             <div className="navbar-item">
@@ -20,7 +37,7 @@ class NavBar extends React.Component {
 
                 {this.props.user.loggedIn && (<span>
                   <Link className="button is-light" to="/user/edit">Edit Profile</Link>
-                  <Link className="button is-light" to="/logout">Logout</Link>
+                  <Link className="button is-light" to="#" onClick={this.handleLogout}>Logout</Link>
                   <Link className="button is-primary" to="/users/me">Hello, { this.props.username }!</Link>
                 </span>)}
               </div>

@@ -22,7 +22,7 @@ class AuthenticationService {
     localStorage.removeItem("user_t");
     localStorage.removeItem("user_r");
     localStorage.removeItem("user_e");
-    return true;
+    return new Promise((resolve) => resolve(true));
   }
 
   register (username, password) {

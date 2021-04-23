@@ -4,6 +4,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  USER_DATA
 } from "../actions/types";
 
 let user = localStorage.getItem("user") ? JSON.parse(atob(
@@ -35,8 +36,7 @@ export default function authenticationReducer (state = initialState, action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        loggedIn: true,
-        user: payload.user,
+        loggedIn: true
       };
     case LOGIN_FAIL:
       return {
@@ -49,6 +49,12 @@ export default function authenticationReducer (state = initialState, action) {
         ...state,
         loggedIn: false,
         user: null,
+      };
+    case USER_DATA:
+      return {
+        ...state,
+        loggedIn: true,
+        user: payload
       };
     default:
       return state;

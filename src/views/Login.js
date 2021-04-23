@@ -1,7 +1,8 @@
-import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 import { login } from "../actions/authentication";
+import { fetchMyself } from "../actions/user";
+import { connect } from "react-redux";
+import React from "react";
 
 class Login extends React.Component {
   constructor (props) {
@@ -52,6 +53,9 @@ class Login extends React.Component {
     login(this.state.username_input, this.state.password_input)(dispatch)
       .catch(() => {
         buttonEl.classList.remove("is-loading");
+      })
+      .then(() => {
+        fetchMyself()(dispatch);
       });
   }
   
@@ -69,10 +73,11 @@ class Login extends React.Component {
 
     return (
       <div className="section">
-        {this.props.message.message && (<span>
-          { this.props.message.message }
-        </span>)}
         <div className="container">
+          {this.props.message.message && (<div class="notification is-danger">
+            <button class="delete"></button>
+            { this.props.message.message }
+          </div>)}
           <h1 className="title">Login</h1>
           <div className="field">
             <label className="label">Username</label>
